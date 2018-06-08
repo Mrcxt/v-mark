@@ -1,0 +1,234 @@
+/*
+ * @Author: 虾哔哔
+ * @Date: 2018-06-08 19:25:31
+ * @Last Modified by:   虾哔哔
+ * @Last Modified time: 2018-06-08 21:25:31
+ */
+
+@import './_color.less';
+@import './_highlight.less';
+body {
+  margin: 0;
+  letter-spacing: 0;
+  font-size: 15px;
+  font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%
+}
+
+a[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+kbd {
+  display: inline-block;
+  margin-bottom: 3px;
+  padding: 3px 5px;
+  border: 1px solid @font-color-light;
+  border-radius: 3px;
+  vertical-align: middle;
+  font-size: 12px !important;
+  line-height: 12px;
+}
+
+.task-list-item {
+  list-style-type: none
+}
+
+li input[type=checkbox] {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle
+}
+
+.markdown-preview>* {
+  box-sizing: border-box;
+  font-size: inherit
+}
+
+.markdown-preview>:first-child {
+  margin-top: 0 !important
+}
+
+.markdown-preview hr {
+  margin: 2em 0;
+  border: none;
+  border-bottom: 1px solid @hr-color;
+}
+
+.markdown-preview table {
+  display: block;
+  overflow: auto;
+  margin-bottom: 16px;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.markdown-preview th {
+  font-weight: 700
+}
+
+.markdown-preview td,
+.markdown-preview th {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-preview tr {
+  border-top: 1px solid @font-color-light
+}
+
+.markdown-preview p.tip,
+.markdown-preview tr:nth-child(2n) {
+  background-color: @bg-color-light
+}
+
+.markdown-preview p.tip {
+  position: relative;
+  margin: 2em 0;
+  padding: 12px 24px 12px 30px;
+  border-left: 4px solid @danger;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.markdown-preview p code {
+  margin: 0 2px;
+  padding: 3px 5px;
+  border-radius: 2px;
+  background-color: @bg-color-light;
+  color: @warning;
+  white-space: inherit;
+  font-size: 0.8em;
+  font-family: 'Roboto Mono', Monaco, courier, monospace;
+}
+
+.markdown-preview p.tip em {
+  color: #34495e
+}
+
+.markdown-preview p.tip:before {
+  position: absolute;
+  top: 14px;
+  left: -12px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: @danger;
+  color: #fff;
+  content: "!";
+  text-align: center;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: Dosis, Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+  line-height: 20px;
+}
+
+.markdown-preview p.warn {
+  padding: 16px;
+  padding: 1rem;
+  border-radius: 2px;
+  background: rgba(66, 185, 131, 0.1);
+}
+
+.markdown-preview h1,
+.markdown-preview h2,
+.markdown-preview h3,
+.markdown-preview h4,
+.markdown-preview strong {
+  color: @font-color-dark;
+  font-weight: 600
+}
+
+.markdown-preview a {
+  color: @success;
+  font-weight: 600
+}
+
+.md-sidebar-toc a {
+  color: @success;
+  font-weight: 600
+}
+
+.markdown-preview h1 {
+  margin: 0 0 16px;
+  margin: 0 0 1rem;
+  font-size: 32px;
+  font-size: 2rem;
+}
+
+.markdown-preview h2 {
+  margin: 45px 0 12.8px;
+  margin: 45px 0 .8rem;
+  font-size: 28px;
+  font-size: 1.75rem;
+}
+
+.markdown-preview h3 {
+  margin: 40px 0 9.6px;
+  margin: 40px 0 .6rem;
+  font-size: 24px;
+  font-size: 1.5rem;
+}
+
+.markdown-preview h4 {
+  font-size: 20px;
+  font-size: 1.25rem
+}
+
+.markdown-preview h5,
+.markdown-preview h6 {
+  font-size: 16px;
+  font-size: 1rem
+}
+
+.markdown-preview h6 {
+  color: #777
+}
+
+.markdown-preview figure,
+.markdown-preview p {
+  margin: 1.2em 0
+}
+
+.markdown-preview ol,
+.markdown-preview p,
+.markdown-preview ul {
+  word-spacing: .8px;
+  word-spacing: .05rem;
+  line-height: 25.6px;
+  line-height: 1.6rem;
+}
+
+.markdown-preview ol,
+.markdown-preview ul {
+  padding-left: 24px;
+  padding-left: 1.5rem
+}
+
+.markdown-preview blockquote {
+  margin: 2em 0;
+  padding-left: 20px;
+  border-left: 4px solid @success;
+  color: #858585;
+}
+
+.markdown-preview blockquote p {
+  margin-left: 0;
+  font-weight: 600;
+}
+
+.markdown-preview iframe {
+  margin: 1em 0
+}
+
+.markdown-preview em {
+  color: #7f8c8d
+}
