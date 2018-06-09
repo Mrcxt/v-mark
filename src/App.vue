@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>v-mark</h1>
-
+    <button @click="getLocal">clg</button>
     <!--  -->
     <div class="v-mark">
       <control-bar></control-bar>
@@ -19,6 +19,16 @@ export default {
   components: {
     editorView,
     controlBar
+  },
+  data() {
+    return {
+      key: ""
+    };
+  },
+  methods: {
+    getLocal() {
+      // console.log(localStorage.getItem("VMARK"));
+    }
   }
 };
 </script>

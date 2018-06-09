@@ -2,7 +2,7 @@
 <template>
   <div class="v-editorView">
     <textarea class="v-editor" :value="input" @input="update"></textarea>
-    <div class="v-view markdown-preview" v-html="markToView"></div>
+    <div class="v-view markdown-preview content" v-html="markToView"></div>
   </div>
 </template>
 
@@ -11,7 +11,8 @@ import { debounce } from "../until/tool";
 import marked from "marked";
 import hljs from "highlight.js";
 
-const demoText = `# 标题一
+const demoText = `
+# 标题一
 
 ## 标题二
 
@@ -42,14 +43,19 @@ const demoText = `# 标题一
 ---
 
 **加重**
-      `;
+
+`;
 
 export default {
   data() {
     return {
-      input: demoText
+      input: demoText,
+      token:
+        "token" + new Date().getTime() + Math.floor(Math.random() * 10000000),
+      date: new Date()
     };
   },
+  created() {},
   computed: {
     markToView: function() {
       return marked(this.input, {
@@ -70,6 +76,9 @@ export default {
     update: debounce(function(e) {
       this.input = e.target.value;
     }, 300)
+  },
+  watch: {
+    input: debounce(function(oldVal, newVal) {}, 0)
   }
 };
 </script>
