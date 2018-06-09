@@ -1,11 +1,28 @@
 <template>
   <div class="v-controlBar">
     <div class="apple"></div>
+    <div class="title">
+      <select>
+        <template v-for="(val,key) in section">
+          <option :value="key">{{val.date}}</option>
+        </template>
+      </select>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      section: {}
+    };
+  },
+  computed: {},
+  mounted() {
+    this.section = JSON.parse(localStorage.getItem("vMarkValue")) || {};
+  }
+};
 </script>
 
 <style lang="less">
@@ -45,6 +62,17 @@ export default {};
     &::after {
       right: -1.5em;
       background-color: #34c84a;
+    }
+  }
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    select {
+      outline: none;
+      border: none;
     }
   }
 }

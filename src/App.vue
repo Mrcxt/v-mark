@@ -25,9 +25,10 @@ export default {
       key: ""
     };
   },
+  computed: {},
   methods: {
     getLocal() {
-      // console.log(localStorage.getItem("VMARK"));
+      console.log(JSON.parse(localStorage.getItem("vMarkValue")));
     }
   }
 };
@@ -35,6 +36,13 @@ export default {
 
 <style lang="less">
 #app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+  h1 {
+    color: @success;
+  }
   .v-mark {
     overflow: hidden;
     margin: 0 auto;

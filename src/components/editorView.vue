@@ -1,7 +1,9 @@
 
 <template>
   <div class="v-editorView">
-    <textarea class="v-editor" :value="input" @input="update"></textarea>
+    <textarea class="v-editor" :value="vMarkValue.input" @input="update">
+
+    </textarea>
     <div class="v-view markdown-preview content" v-html="markToView"></div>
   </div>
 </template>
@@ -12,53 +14,95 @@ import marked from "marked";
 import hljs from "highlight.js";
 
 const demoText = `
-# 标题一
 
-## 标题二
+# h1
 
-### 标题三
+## h2
 
-#### 标题四
+### h3
 
-##### 标题五
+#### h4
 
-###### 标题六
+##### h5
 
-正文
+###### h6
 
-[a链接](1231231221)
+ppppppp
 
+**bbbbbbb**
 
-- 无序标签
-- 无序标签
+*iiiiiii*
 
+[aaaaaaa]()
 
-1. 有序标签
-2. 有序标签
+![img](http://oz2tkq0zj.bkt.clouddn.com/17-11-9/76001088.jpg)
 
+> blockquoteblockquote
+> blockquoteblockquote
 
-> 引用
+- ul
+- ul
+- ul
+- ul
+  - ul
+- ul
+  - ul
+- ul
+  - ul
 
+1. ol
+1. ol
+1. ol
+1. ol
+  - ul
+2. ol
+  - ul
+3. ol
+  - ul
 
 ---
 
-**加重**
+- [ ] checkBox
+- [ ] checkBox
+- [ ] checkBox
+- [x] checkBox
+- [x] checkBox
+- [x] checkBox
+
+
+&#x60; code &#x60;;
+
+&#x60;&#x60;&#x60; css
+// /将转义字符替换查看效果
+.v-mark {
+    overflow: hidden;
+    margin: 0 auto;
+    width: 968px;
+    border: 1px solid #2d2d2d;
+    border-radius: 10px;
+  }
+
+&#x60;&#x60;&#x60;
+
+
+
 
 `;
 
 export default {
   data() {
     return {
-      input: demoText,
       token:
         "token" + new Date().getTime() + Math.floor(Math.random() * 10000000),
-      date: new Date()
+      vMarkValue: {
+        date: this.$dayjs().format("YYYY年MM-DD HH:mm:ss"),
+        input: demoText
+      }
     };
   },
-  created() {},
   computed: {
     markToView: function() {
-      return marked(this.input, {
+      return marked(this.vMarkValue.input, {
         gfm: true, //允许 Git Hub标准的markdown.
         tables: true, //允许支持表格语法。该选项要求 gfm 为true。
         breaks: true, //允许回车换行。该选项要求 gfm 为true。
@@ -70,15 +114,29 @@ export default {
           return hljs.highlightAuto(code).value;
         }
       });
+    },
+    section() {
+      return JSON.parse(localStorage.getItem("vMarkValue")) || {};
     }
   },
   methods: {
     update: debounce(function(e) {
-      this.input = e.target.value;
-    }, 300)
+      this.vMarkValue.input = e.target.value;
+    }, 300),
+    // 保存数据
+    saveSection() {
+      this.section[this.token] = this.vMarkValue;
+      localStorage.setItem("vMarkValue", JSON.stringify(this.section));
+    }
+  },
+  created() {
+    this.saveSection();
   },
   watch: {
-    input: debounce(function(oldVal, newVal) {}, 0)
+    // 监听数据变化，延迟保存数据
+    "vMarkValue.input": debounce(function(oldVal, newVal) {
+      this.saveSection();
+    }, 0)
   }
 };
 </script>
