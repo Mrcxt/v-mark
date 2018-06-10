@@ -103,12 +103,13 @@ export default {
       token:
         "token" + new Date().getTime() + Math.floor(Math.random() * 10000000),
       vMarkValue: {
-        date: this.$dayjs().format("YYYY年MM-DD HH:mm:ss"),
+        date: this.$dayjs().format("YYYY年MM年DD HH:mm:ss"),
         input: demoText
       }
     };
   },
   computed: {
+    // marked
     markToView: function() {
       return marked(this.vMarkValue.input, {
         gfm: true, //允许 Git Hub标准的markdown.
@@ -125,6 +126,9 @@ export default {
     },
     section() {
       return JSON.parse(localStorage.getItem("vMarkValue")) || {};
+    },
+    storeToken() {
+      return this.$store.state.token;
     }
   },
   methods: {
@@ -134,18 +138,24 @@ export default {
     }, 300),
     // 保存数据
     saveSection() {
-      this.section[this.token] = this.vMarkValue;
+      this.section[this.$store.state.token] = this.vMarkValue;
       localStorage.setItem("vMarkValue", JSON.stringify(this.section));
     }
+    // 修改
   },
   created() {
+    this.$store.state.token = this.token;
     this.saveSection();
   },
   watch: {
     // 监听数据变化，延迟保存数据
     "vMarkValue.input": debounce(function(oldVal, newVal) {
       this.saveSection();
-    }, 0)
+    }, 0),
+    storeToken() {
+      console.log(this.storeToken);
+      this.vMarkValue.input = this.section[this.$store.state.token].input;
+    }
   }
 };
 </script>

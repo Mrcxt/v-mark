@@ -2,6 +2,7 @@
 // standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+import store from './store'
 import dayjs from 'dayjs'
 import VueSplitPane from 'vue-splitpane'
 
@@ -20,5 +21,6 @@ new Vue({
   components: {
     App
   },
+  store,
   template: '<App/>'
 })

@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <h1>v-mark</h1>
-    <button @click="getLocal">clg</button>
     <!--  -->
     <div class="v-mark">
       <control-bar></control-bar>
@@ -26,11 +25,7 @@ export default {
     };
   },
   computed: {},
-  methods: {
-    getLocal() {
-      console.log(JSON.parse(localStorage.getItem("vMarkValue")));
-    }
-  }
+  methods: {}
 };
 </script>
 

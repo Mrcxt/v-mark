@@ -2,7 +2,7 @@
   <div class="v-controlBar">
     <div class="apple"></div>
     <div class="title">
-      <select>
+      <select v-model="token" @change="changeToken">
         <template v-for="(val,key) in section">
           <option :value="key">{{val.date}}</option>
         </template>
@@ -18,9 +18,25 @@ export default {
       section: {}
     };
   },
-  computed: {},
+  computed: {
+    token: {
+      get: function() {
+        return this.$store.state.token;
+      },
+      set: function(newVal) {
+        this.$store.state.token = newVal;
+      }
+    }
+  },
   mounted() {
     this.section = JSON.parse(localStorage.getItem("vMarkValue")) || {};
+  },
+  methods: {
+    changeToken() {
+      this.$store.commit("setToken", this.token);
+      console.log(this.token);
+      console.log(this.$store.state.token);
+    }
   }
 };
 </script>
