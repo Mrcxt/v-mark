@@ -100,12 +100,12 @@ ppppppp
 export default {
   data() {
     return {
-      token:
-        "token" + new Date().getTime() + Math.floor(Math.random() * 10000000),
       vMarkValue: {
         date: this.$dayjs().format("YYYY年MM年DD HH:mm:ss"),
         input: demoText
-      }
+      },
+      token:
+        "token" + new Date().getTime() + Math.floor(Math.random() * 10000000)
     };
   },
   computed: {
@@ -126,10 +126,10 @@ export default {
     },
     section() {
       return JSON.parse(localStorage.getItem("vMarkValue")) || {};
-    },
-    storeToken() {
-      return this.$store.state.token;
     }
+    // token() {
+    //   return this.$store.state.token;
+    // }
   },
   methods: {
     // 延迟300ms赋值
@@ -138,23 +138,25 @@ export default {
     }, 300),
     // 保存数据
     saveSection() {
-      this.section[this.$store.state.token] = this.vMarkValue;
+      this.section[this.token] = this.vMarkValue;
       localStorage.setItem("vMarkValue", JSON.stringify(this.section));
+      console.log(this.section);
     }
-    // 修改
   },
   created() {
-    this.$store.state.token = this.token;
+    // 新建文章自动保存一次
     this.saveSection();
   },
   watch: {
     // 监听数据变化，延迟保存数据
-    "vMarkValue.input": debounce(function(oldVal, newVal) {
+    "vMarkValue.input": debounce(function(newVal, oldVal) {
       this.saveSection();
-    }, 3000),
+    }, 0),
     // token变化时，修改 textarea 的值
-    storeToken() {
-      this.vMarkValue.input = this.section[this.$store.state.token].input;
+    token(newVal, oldVal) {
+      console.log(newVal);
+      console.log(this.section[newVal].input);
+      this.vMarkValue.input = this.section[newVal].input;
     }
   }
 };
