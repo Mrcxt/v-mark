@@ -151,9 +151,9 @@ export default {
     // 监听数据变化，延迟保存数据
     "vMarkValue.input": debounce(function(oldVal, newVal) {
       this.saveSection();
-    }, 0),
+    }, 3000),
+    // token变化时，修改 textarea 的值
     storeToken() {
-      console.log(this.storeToken);
       this.vMarkValue.input = this.section[this.$store.state.token].input;
     }
   }
