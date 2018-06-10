@@ -1,21 +1,12 @@
 # v-mark
 
-> A Vue.js project
+## 更新
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- の
+  - [新增]可以自由改变左右两边窗口大小
+- の
+  - [新增]可以查看所有保存过的历史文章
+- の
+  - [新增]编辑器内容修改 5 秒后自动保存。
+- の
+  - [新增]新增 markdown 预览样式
