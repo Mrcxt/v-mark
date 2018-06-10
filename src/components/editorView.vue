@@ -1,10 +1,15 @@
 
 <template>
   <div class="v-editorView">
-    <textarea class="v-editor" :value="vMarkValue.input" @input="update">
+    <split-pane :min-percent='20' :default-percent='50' split="vertical">
+      <template slot="paneL">
+        <textarea class="v-editor" :value="vMarkValue.input" @input="update"></textarea>
 
-    </textarea>
-    <div class="v-view markdown-preview content" v-html="markToView"></div>
+      </template>
+      <template slot="paneR">
+        <div class="v-view markdown-preview content" v-html="markToView"></div>
+      </template>
+    </split-pane>
   </div>
 </template>
 
@@ -85,6 +90,9 @@ ppppppp
 &#x60;&#x60;&#x60;
 
 
+| 事件名 | 说明 | 返回值 |
+| --- | --- | --- |
+| click | 点击按钮时触发 | 无  |
 
 
 `;
@@ -120,6 +128,7 @@ export default {
     }
   },
   methods: {
+    // 延迟300ms赋值
     update: debounce(function(e) {
       this.vMarkValue.input = e.target.value;
     }, 300),
@@ -144,15 +153,14 @@ export default {
 
 <style lang="less">
 .v-editorView {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   height: 500px;
   .v-editor,
   .v-view {
     overflow-y: auto;
-    flex: 1;
     padding: 20px;
+    width: 100%;
+    height: 100%;
   }
   .v-editor {
     outline: none;

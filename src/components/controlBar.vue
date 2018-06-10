@@ -73,6 +73,8 @@ export default {
     select {
       outline: none;
       border: none;
+
+      // appearance: none;
     }
   }
 }
