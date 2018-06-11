@@ -31,8 +31,6 @@ export default {
   },
   computed: {},
   mounted() {
-    console.log(this.token);
-    console.log(this.section);
     this.mySection = this.section;
   },
   methods: {
