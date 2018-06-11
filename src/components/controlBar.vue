@@ -2,8 +2,8 @@
   <div class="v-controlBar">
     <div class="apple"></div>
     <div class="title">
-      <select v-model="token">
-        <template v-for="(val,key) in section">
+      <select v-model="myToken" @change="onchange">
+        <template v-for="(val,key) in mySection">
           <option :value="key">{{val.date}}</option>
         </template>
       </select>
@@ -15,30 +15,32 @@
 export default {
   data() {
     return {
-      section: {},
-      token: null
+      myToken: this.token,
+      mySection: {}
     };
   },
-  computed: {
-    // token: {
-    //   get: function() {
-    //     return this.$store.state.token;
-    //   },
-    //   set: function(val) {
-    //     this.$store.state.token = val;
-    //   }
-    // }
+  props: {
+    token: {
+      type: String,
+      default: null
+    },
+    section: {
+      type: Object,
+      default: function() {}
+    }
   },
+  computed: {},
   mounted() {
-    this.section = JSON.parse(localStorage.getItem("vMarkValue")) || {};
+    console.log(this.token);
+    console.log(this.section);
+    this.mySection = this.section;
   },
-  methods: {},
-  watch: {
-    // token(newVal, oldVal) {
-    //   console.log(newVal);
-    //   // this.$store.commit("setToken", newVal);
-    // }
-  }
+  methods: {
+    onchange() {
+      this.$emit("changeToken", this.myToken);
+    }
+  },
+  watch: {}
 };
 </script>
 
@@ -47,7 +49,7 @@ export default {
   position: relative;
   width: 100%;
   height: 48px;
-  border-bottom: 1px solid #2d2d2d;
+  border-bottom: 1px solid @hr-color;
   border-radius: 7px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;

@@ -1,117 +1,54 @@
 
 <template>
-  <div class="v-editorView">
-    <split-pane :min-percent='20' :default-percent='50' split="vertical">
-      <template slot="paneL">
-        <textarea class="v-editor" :value="vMarkValue.input" @input="update"></textarea>
-
-      </template>
-      <template slot="paneR">
-        <div class="v-view markdown-preview content" v-html="markToView"></div>
-      </template>
-    </split-pane>
+  <div class="v-mark">
+    <!--  -->
+    <control-bar :token="token" :section="localSection" @changeToken="changeToken"></control-bar>
+    <!--  -->
+    <!-- <div class="v-editorBar">
+      <button class="bttn-simple bttn-xs bttn-success">{{onSaveText}}</button>
+    </div> -->
+    <!--  -->
+    <div class="v-editorView">
+      <split-pane :min-percent='20' :default-percent='50' split="vertical">
+        <template slot="paneL">
+          <textarea class="v-editor" :value="section.input" @input="update"></textarea>
+        </template>
+        <template slot="paneR">
+          <div class="v-view" v-html="markToView"></div>
+        </template>
+      </split-pane>
+    </div>
   </div>
 </template>
 
 <script>
 import { debounce } from "../until/tool";
+import demoText from "../until/markdown-demo";
 import marked from "marked";
 import hljs from "highlight.js";
 
-const demoText = `
-
-# h1
-
-## h2
-
-### h3
-
-#### h4
-
-##### h5
-
-###### h6
-
-ppppppp
-
-**bbbbbbb**
-
-*iiiiiii*
-
-[aaaaaaa]()
-
-![img](http://oz2tkq0zj.bkt.clouddn.com/17-11-9/76001088.jpg)
-
-> blockquoteblockquote
-> blockquoteblockquote
-
-- ul
-- ul
-- ul
-- ul
-  - ul
-- ul
-  - ul
-- ul
-  - ul
-
-1. ol
-1. ol
-1. ol
-1. ol
-  - ul
-2. ol
-  - ul
-3. ol
-  - ul
-
----
-
-- [ ] checkBox
-- [ ] checkBox
-- [ ] checkBox
-- [x] checkBox
-- [x] checkBox
-- [x] checkBox
-
-
-&#x60; code &#x60;;
-
-&#x60;&#x60;&#x60; css
-// /将转义字符替换查看效果
-.v-mark {
-    overflow: hidden;
-    margin: 0 auto;
-    width: 968px;
-    border: 1px solid #2d2d2d;
-    border-radius: 10px;
-  }
-
-&#x60;&#x60;&#x60;
-
-
-| 事件名 | 说明 | 返回值 |
-| --- | --- | --- |
-| click | 点击按钮时触发 | 无  |
-
-
-`;
+//
+import controlBar from "./controlBar";
 
 export default {
+  components: {
+    controlBar
+  },
   data() {
     return {
-      vMarkValue: {
+      section: {
         date: this.$dayjs().format("YYYY年MM年DD HH:mm:ss"),
         input: demoText
       },
       token:
-        "token" + new Date().getTime() + Math.floor(Math.random() * 10000000)
+        "token" + new Date().getTime() + Math.floor(Math.random() * 10000000),
+      onSaveText: ""
     };
   },
   computed: {
     // marked
     markToView: function() {
-      return marked(this.vMarkValue.input, {
+      return marked(this.section.input, {
         gfm: true, //允许 Git Hub标准的markdown.
         tables: true, //允许支持表格语法。该选项要求 gfm 为true。
         breaks: true, //允许回车换行。该选项要求 gfm 为true。
@@ -120,43 +57,45 @@ export default {
         smartLists: true, //使用比原生markdown更时髦的列表。 旧的列表将可能被作为pedantic的处理内容过滤掉.
         smartypants: false, //使用更为时髦的标点，比如在引用语法中加入破折号。
         highlight: function(code) {
-          return hljs.highlightAuto(code).value;
+          // return hljs.highlightAuto(code).value;
+          return hljs ? hljs.highlightAuto(code).value : code;
         }
       });
     },
-    section() {
-      return JSON.parse(localStorage.getItem("vMarkValue")) || {};
+    // 初始化 section数据
+    localSection() {
+      return JSON.parse(localStorage.getItem("v_mark_section")) || {};
     }
-    // token() {
-    //   return this.$store.state.token;
-    // }
   },
   methods: {
     // 延迟300ms赋值
     update: debounce(function(e) {
-      this.vMarkValue.input = e.target.value;
+      this.section.input = e.target.value;
     }, 300),
     // 保存数据
     saveSection() {
-      this.section[this.token] = this.vMarkValue;
-      localStorage.setItem("vMarkValue", JSON.stringify(this.section));
-      console.log(this.section);
+      this.localSection[this.token] = JSON.parse(JSON.stringify(this.section));
+      localStorage.setItem("v_mark_section", JSON.stringify(this.localSection));
+      // console.log("saveSection");
+    },
+    // 将子组件 token 值返回父组件
+    changeToken(token) {
+      this.token = token;
     }
   },
-  created() {
+  created() {},
+  mounted() {
     // 新建文章自动保存一次
     this.saveSection();
   },
   watch: {
     // 监听数据变化，延迟保存数据
-    "vMarkValue.input": debounce(function(newVal, oldVal) {
+    "section.input": debounce(function(newVal, oldVal) {
       this.saveSection();
-    }, 0),
+    }, 3000),
     // token变化时，修改 textarea 的值
     token(newVal, oldVal) {
-      console.log(newVal);
-      console.log(this.section[newVal].input);
-      this.vMarkValue.input = this.section[newVal].input;
+      this.section.input = this.localSection[newVal].input;
     }
   }
 };
@@ -164,9 +103,15 @@ export default {
 
 
 <style lang="less">
+.v-editorBar {
+  padding: 5px 15px;
+  background-color: @hr-color;
+}
+//
 .v-editorView {
   width: 100%;
   height: 500px;
+  border-top: 1px solid @bg-color-dark;
   .v-editor,
   .v-view {
     overflow-y: auto;
@@ -177,7 +122,7 @@ export default {
   .v-editor {
     outline: none;
     border: none;
-    background-color: #2d2d2d;
+    background-color: @bg-color-dark;
     color: #ccc;
     font-size: 14px;
     font-family: "Monaco", courier, monospace;

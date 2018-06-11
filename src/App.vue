@@ -2,7 +2,7 @@
   <div id="app">
     <h1>v-mark</h1>
     <!--  -->
-    <div class="describe content">
+    <div class="describe markdown-preview">
       <blockquote>
         <p>利用`vue`和`marked`实现的 markdown 编辑器，功能如下：</p>
         <ul>
@@ -18,22 +18,17 @@
       </blockquote>
     </div>
     <!--  -->
-    <div class="v-mark">
-      <control-bar></control-bar>
-      <editor-view></editor-view>
-    </div>
+    <editor-view></editor-view>
   </div>
 </template>
 
 <script>
 import editorView from "./components/editorView";
-import controlBar from "./components/controlBar";
 
 export default {
   name: "App",
   components: {
-    editorView,
-    controlBar
+    editorView
   },
   data() {
     return {

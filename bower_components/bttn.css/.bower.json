@@ -1,0 +1,15 @@
+{
+  "name": "bttn.css",
+  "homepage": "https://github.com/ganapativs/bttn.css",
+  "version": "0.2.4",
+  "_release": "0.2.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.4",
+    "commit": "c4950b1bb95b661942ae2e070782e9d1571ac9d7"
+  },
+  "_source": "https://github.com/ganapativs/bttn.css.git",
+  "_target": "^0.2.4",
+  "_originalSource": "bttn.css",
+  "_direct": true
+}
