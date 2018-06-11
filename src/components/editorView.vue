@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       section: {
-        date: this.$dayjs().format("YYYY年MM年DD HH:mm:ss"),
+        date: this.$dayjs().format("YYYY年MM月DD日 HH:mm:ss"),
         input: demoText
       },
       token:
