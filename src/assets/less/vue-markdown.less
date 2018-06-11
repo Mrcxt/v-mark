@@ -2,17 +2,26 @@
  * @Author: 虾哔哔
  * @Date: 2018-06-08 19:25:31
  * @Last Modified by: 虾哔哔
- * @Last Modified time: 2018-06-11 14:12:16
+ * @Last Modified time: 2018-06-11 14:49:43
  */
 
 @import './_color.less';
 @import './_highlight.less';
-body {
-  margin: 0;
-  letter-spacing: 0;
-  font-size: 15px;
-  font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+html {
+  height: 100%;
 
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  color: #383838;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: "Menlo", "Meslo LG", monospace;
+  line-height: 1.725;
+
+  text-rendering: geometricPrecision;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
@@ -203,32 +212,6 @@ kbd {
 *:before,
 *:after {
   box-sizing: border-box;
-}
-
-html {
-  height: 100%;
-
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  color: #383838;
-  font-weight: 400;
-  font-size: 14px;
-  font-family: "Menlo", "Meslo LG", monospace;
-  line-height: 1.725;
-
-  text-rendering: geometricPrecision;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-
-.markdown-preview {
-  flex: 1;
 }
 
 .markdown-preview p {

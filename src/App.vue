@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" class="markdown-preview">
     <h1>v-mark</h1>
     <!--  -->
-    <div class="describe markdown-preview">
+    <div class="describe">
       <blockquote>
         <p>利用`vue`和`marked`实现的 markdown 编辑器，功能如下：</p>
         <ul>
