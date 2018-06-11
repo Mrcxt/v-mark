@@ -46,18 +46,17 @@ export default {
   align-items: center;
   flex-direction: column;
   justify-content: space-around;
+  margin-bottom: 150px;
   h1 {
     color: @success;
   }
   .describe {
-    margin: 0 auto;
     width: 768px;
   }
   .v-mark {
     overflow: hidden;
-    margin: 0 auto;
     width: 998px;
-    border: 1px solid #2d2d2d;
+    border: 1px solid @bg-color-dark;
     border-radius: 10px;
   }
 }
