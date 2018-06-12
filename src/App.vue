@@ -2,6 +2,14 @@
   <div id="app" class="markdown-preview">
     <h1>v-mark</h1>
     <!--  -->
+    <div class="rss-link">
+      <button class="bttn-simple bttn-xs bttn-success">
+        <a href="https://github.com/Mrcxt/v-mark">Github源码</a>
+      </button>
+      <button class="bttn-simple bttn-xs bttn-success">
+        <a href="https://blog.mrcxt.com/">虾哔哔のBlog</a>
+      </button>
+    </div>
     <div class="describe">
       <blockquote>
         <p>利用`vue`和`marked`实现的 markdown 编辑器，功能如下：</p>

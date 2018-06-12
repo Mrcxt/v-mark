@@ -8,7 +8,7 @@ import VueSplitPane from 'vue-splitpane'
 /* css */
 import 'normalize.css'
 import './assets/less/vue-markdown.less'
-// import '../bower_components/bttn.css/dist/bttn.min.css'
+import '../bower_components/bttn.css/dist/bttn.min.css'
 
 Vue.config.productionTip = false
 
